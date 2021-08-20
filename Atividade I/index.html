@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos Covid</title>
+    <script src="app.js" defer></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>Casos Acumulados Covid-19 para 2020 para cada região do Brasil</h3>
+    
+    <svg width=1280 height=720 class="bar-chart">
+        <!-- Eixo X -->
+        <line x1="100" y1="700" x2="100" y2="0" style="stroke:#000000; stroke-width: 1px;" />
+        <!-- Eixo Y -->
+        <line x1="70" y1="680" x2="1270" y2="680" style="stroke:#000000; stroke-width: 1px;" />
+
+        <g class="eixo-y">
+            <g>
+                <line x1="90" y1="630" x2="110" y2="630" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="635">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="580" x2="110" y2="580" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="585">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="530" x2="110" y2="530" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="535">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="480" x2="110" y2="480" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="485">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="430" x2="110" y2="430" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="435">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="380" x2="110" y2="380" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="385">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="330" x2="110" y2="330" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="335">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="280" x2="110" y2="280" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="285">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="230" x2="110" y2="230" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="235">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="180" x2="110" y2="180" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="185">2000</text>
+            </g>
+            <g>
+                <line x1="90" y1="130" x2="110" y2="130" style="stroke:#000000; stroke-width: 1px;" />
+    
+                <text x="50" y="135">2000</text>
+            </g>
+        </g>
+
+        <!-- Cálculo da posição
+            valor de y: 680 - valor do banco / 40
+            height: valor do banco / 40
+            posição y do texto: height - 5
+            40 é o valor de pixels por número de casos
+        -->
+        <g class="centro-oeste">
+            <rect x="200" y="654.68" height="25.32" width="150"
+            style="fill: #000000"/>
+            <text x="275" y="650" style="text-anchor: middle">1013</text>
+            <text x="275" y="700" style="text-anchor: middle">Centro Oeste</text>
+        </g>
+        <g class="nordeste">
+            <rect x="400" y="544.475" height="135.525" width="150"
+            style="fill: #000000"/>
+            <text x="475" y="540" style="text-anchor: middle">5421</text>
+            <text x="475" y="700" style="text-anchor: middle">Nordeste</text>
+        </g>
+        <g class="norte">
+            <rect x="600" y="589.125" height="90.875" width="150"
+            style="fill: #000000"/>
+            <text x="675" y="584" style="text-anchor: middle">3635</text>
+            <text x="675" y="700" style="text-anchor: middle">Norte</text>
+        </g>
+        <g class="sudeste">
+            <rect x="800" y="180" height="500.1" width="150"
+            style="fill: #000000"/>
+            <text x="875" y="175" style="text-anchor: middle">20004</text>
+            <text x="875" y="700" style="text-anchor: middle">Sudeste</text>
+        </g>
+        <g class="sul">
+            <rect x="1000" y="649.775" height="30.225" width="150"
+            style="fill: #000000"/>
+            <text x="1075" y="645" style="text-anchor: middle">1209</text>
+            <text x="1075" y="700" style="text-anchor: middle">Sul</text>
+        </g>
+    </svg>
+</body>
+</html>
