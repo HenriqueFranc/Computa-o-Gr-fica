@@ -1,1 +1,1 @@
-# Projetos de Computação Gráfica
+# Computação Gráfica
