@@ -38,7 +38,7 @@ function processData(allText) {
 // Valor de Y da barra: 680 - (valor do banco / 40)
 // Altura da Barra: (valor do banco / 40)
 // Posição Y do texto: Y da Barra - 5
-// 40 é o valor de pixels por número de casos definido por nós
+// 40 é o valor de pixels por número de casos definido pela equipe
 
 function calcularPosicaoYBarra(valor) {
     return 680 - (valor / 40);
@@ -55,19 +55,19 @@ function calcularPosicaoYTexto(valor) {
 $(document).ready(function() {
     $.ajax({
         type: "GET",
-        url: "df.csv",
+        url: "https://raw.githubusercontent.com/HenriqueFranc/Computa-o-Gr-fica/main/Atividade%20I/df.csv",
         dataType: "text",
         success: function(data) {
             var dados = processData(data);
-            console.log(dados)
-
-            // Modificando o Gráfico
+            
+            // Dados de Cada Região
             var centroOeste = dados[0];
             var Nordeste = dados[1];
             var Norte = dados[2];
             var Sudeste = dados[3];
             var Sul = dados[4];
-
+            
+            // Modificando o Gráfico
             var centro_oeste = document.querySelector(".centro-oeste");
             centro_oeste.children[0].setAttribute("height",  calcularAlturaBarra(centroOeste.casosAcumulados));
             centro_oeste.children[0].setAttribute("y",  calcularPosicaoYBarra(centroOeste.casosAcumulados));

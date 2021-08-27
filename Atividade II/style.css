@@ -1,0 +1,29 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 50px;
+}
+
+h2 {
+    text-align: center;
+    margin: 30;
+}
+
+.text {
+    text-anchor: middle
+}
+
+.eixos {
+    stroke:black; 
+    stroke-width: 1px;
+}
+
+svg {
+    display: block;
+    margin: auto;
+}
+
+.circle {
+    stroke:black;
+    stroke-width: 1px; 
+}
+ 
