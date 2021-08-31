@@ -130,13 +130,13 @@ function execução(id){
 
         case 'DDA':
             pontos = receberInputRetas('x1','x2','y1','y2')
-            DDA(pontos[0],pontos[1],pontos[2],pontos[2]);
+            DDA(pontos[0],pontos[1],pontos[2],pontos[3]);
             bresenham(0,0,0,0);
             break;
 
         case 'Bresenham':
             pontos = receberInputRetas('x1','x2','y1','y2')
-            bresenham(pontos[0],pontos[1],pontos[2],pontos[2]);
+            bresenham(pontos[0],pontos[1],pontos[2],pontos[3]);
             break;
         case 'Ponto Médio':
             pontos = receberInputCirculo('raio','x1circulo','y1circulo')
