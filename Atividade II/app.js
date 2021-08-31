@@ -32,7 +32,7 @@ function DDA(X1,Y1, X2,Y2)
     }
 }
 
-DDA(0, 0, 1280, 720)
+// DDA(0, 0, 1280, 720)
 
 // Implementação do Bresenham
 
@@ -58,7 +58,7 @@ function bresenham(X1,Y1, X2,Y2) {
     }
 }
 
-bresenham(0, 500, 1280, 720)
+// bresenham(0, 500, 1280, 720)
 
 // Implementação do Algoritmo de Círculo Simples
 
@@ -92,7 +92,7 @@ function algoritmoCirculoSimples(xc, yc, r)
     }
 }
 
-algoritmoCirculoSimples(200,200,100);
+// algoritmoCirculoSimples(200,200,100);
 
 // Implementação do Ponto Médio para Círculos
 
@@ -117,7 +117,76 @@ function pontoMedioParaCirculo(xc, yc, r){
     }
 }
  
-pontoMedioParaCirculo(300,200, 200);
+// pontoMedioParaCirculo(300,200, 200);
 
 // Form
 
+function execução(id){
+    
+    let pontos;
+    let chave = selecao(id);
+
+    switch (chave) {
+
+        case 'DDA':
+            pontos = receberInputRetas('x1','x2','y1','y2')
+            DDA(pontos[0],pontos[1],pontos[2],pontos[2]);
+            bresenham(0,0,0,0);
+            break;
+
+        case 'Bresenham':
+            pontos = receberInputRetas('x1','x2','y1','y2')
+            bresenham(pontos[0],pontos[1],pontos[2],pontos[2]);
+            break;
+        case 'Ponto Médio':
+            pontos = receberInputCirculo('raio','x1circulo','y1circulo')
+            pontoMedioParaCirculo(pontos[0],pontos[1],pontos[2]);
+            break;
+
+        case 'Círculo Simples':
+            pontos = receberInputCirculo('raio','x1circulo','y1circulo')
+            algoritmoCirculoSimples(pontos[0],pontos[1],pontos[2]);
+            break;
+
+        default:
+            break;
+    }
+}
+
+function selecao(id){
+    var e = document.getElementById(id);
+    var strUser = e.options[e.selectedIndex].text;
+    return strUser;
+}
+function receberInputRetas(idx1,idx2,idy1,idy2){
+ 
+    var X1 = document.getElementById(idx1);
+    var valueX1 = parseFloat(X1.value);
+    var X2 = document.getElementById(idx2);
+    var valueX2 = parseFloat(X2.value);
+    var Y1 = document.getElementById(idy1);
+    var valueY1 = parseFloat(Y1.value);
+    var Y2 = document.getElementById(idy2);
+    var valueY2 = parseFloat(Y2.value);
+
+    return [valueX1,valueY1,valueX2,valueY2]
+}
+
+
+function receberInputCirculo(idRaio, idx1, idy1){
+
+    console.log('entrei')
+    var raio = document.getElementById(idRaio);
+    var valueRaio = parseFloat(raio.value);
+    var X1 = document.getElementById(idx1);
+    var valueX1 = parseFloat(X1.value);
+    var Y1 = document.getElementById(idy1);
+    var valueY1 = parseFloat(Y1.value);
+
+    return [valueX1, valueY1,valueRaio]
+}
+
+function limparSvg(){
+    let node = document.querySelector("svg");
+    node.querySelectorAll('*').forEach(n => n.remove());
+}
