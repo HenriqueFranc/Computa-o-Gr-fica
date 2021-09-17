@@ -1,0 +1,7 @@
+name: openGL
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pyopengl
+prefix: /home/turin-pc/anaconda3/envs/openGL
