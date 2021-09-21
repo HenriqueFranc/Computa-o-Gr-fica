@@ -3,13 +3,15 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
+from lines import *
+
+# Variáveis Globais para translação
 Tx = 0.0
 Ty = 0.0
 
 def inicializa ():
     glClearColor(2.0, 3.0, 1.0, 1.0)
     glMatrixMode(GL_MODELVIEW)
-    # gluOrtho2D(0.0, 10.0, 0.0, 10.0)   
     gluOrtho2D(0.0, 500, 500, 0.0)   
 
 def quadrado ():
@@ -19,11 +21,11 @@ def quadrado ():
     glPushMatrix()
     glTranslatef(Tx, Ty, 0.0)
     glBegin(GL_QUADS)
-    glColor3f(0,0,1)
-    glVertex3f(250, 350, 0)
-    glVertex3f(250, 400, 0)
-    glVertex3f(300, 400, 0)
-    glVertex3f(300, 350, 0) 
+    glColor3f(0,0,1)  
+    glVertex3f(435, 434, 0)
+    glVertex3f(435, 484, 0)
+    glVertex3f(485, 484, 0)
+    glVertex3f(485, 434, 0)
     glEnd()
     glPopMatrix()
 
@@ -47,30 +49,16 @@ def pontos ():
     glVertex2i(4, 2)
     glEnd() 
 
-def lines ():
-    glColor3f(0.0, 0.0, 0.0)
-    glBegin(GL_LINES)
-    glVertex2i(0, 0)
-    glVertex2i(500, 500)
-    # glVertex2i(150, 130)
-    # glVertex2i(150, 50)
-    glEnd()
-
 def desenha ():
-    # Limpa a janela de visualização com a cor de fundo especificada
-
-    glMatrixMode(GL_MODELVIEW)
-    # glLoadIdentity()
-    # glPopMatrix()
-
     glClear(GL_COLOR_BUFFER_BIT)
 
     quadrado()
     # triangulo()
-    # lines()
+    lines()
     # pontos()
     glFlush()
 
+# Tecla ESC fecha a janela
 def teclado (key, x, y):
     print(x,y)
     print(key)
@@ -80,24 +68,21 @@ def teclado (key, x, y):
 def control(key, x, y):
     global Ty
     global Tx
-
-    # glPushMatrix()
-    # glLoadIdentity()
-    
+    step = 10
+  
     print(Tx, Ty)
     
     if key == GLUT_KEY_UP:
-        Ty -= 2
+        Ty -= step
     elif key == GLUT_KEY_DOWN:
-        Ty += 2
+        Ty += step
     elif key == GLUT_KEY_LEFT:
-        Tx -= 2
+        Tx -= step
     elif key == GLUT_KEY_RIGHT:
-        Tx += 2
+        Tx += step
     elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
-
-    # glPopMatrix() 
+  
     glutPostRedisplay()
 
 def main():
@@ -105,7 +90,7 @@ def main():
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutInitWindowSize(500, 500)
     glutInitWindowPosition(500, 300)
-    glutCreateWindow("Primeiro Programa")
+    glutCreateWindow("Labirinto")
     glutKeyboardFunc(teclado)
     glutSpecialFunc(control)
     glutDisplayFunc(desenha)
