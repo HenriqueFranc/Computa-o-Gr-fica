@@ -15,9 +15,9 @@ def inicializa ():
 def quadrado ():
     global Tx
     global Ty
-    
-    glTranslatef(Tx, Ty, 0)
 
+    glPushMatrix()
+    glTranslatef(Tx, Ty, 0.0)
     glBegin(GL_QUADS)
     glColor3f(0,0,1)
     glVertex3f(250, 350, 0)
@@ -25,6 +25,7 @@ def quadrado ():
     glVertex3f(300, 400, 0)
     glVertex3f(300, 350, 0) 
     glEnd()
+    glPopMatrix()
 
 def triangulo ():
     # Define a cor de desenho: vermelho
@@ -57,16 +58,17 @@ def lines ():
 
 def desenha ():
     # Limpa a janela de visualização com a cor de fundo especificada
-    glClear(GL_COLOR_BUFFER_BIT)
 
     glMatrixMode(GL_MODELVIEW)
     # glLoadIdentity()
+    # glPopMatrix()
+
+    glClear(GL_COLOR_BUFFER_BIT)
 
     quadrado()
     # triangulo()
     # lines()
     # pontos()
-
     glFlush()
 
 def teclado (key, x, y):
@@ -83,20 +85,19 @@ def control(key, x, y):
     # glLoadIdentity()
     
     print(Tx, Ty)
-
+    
     if key == GLUT_KEY_UP:
-        Ty = Ty - 2
-    if key == GLUT_KEY_DOWN:
-        Ty = Ty + 2
-    if key == GLUT_KEY_LEFT:
-        Tx = Tx - 2
-    if key == GLUT_KEY_RIGHT:
-        Tx = Tx + 2
-    if key == b'\x1b':
+        Ty -= 2
+    elif key == GLUT_KEY_DOWN:
+        Ty += 2
+    elif key == GLUT_KEY_LEFT:
+        Tx -= 2
+    elif key == GLUT_KEY_RIGHT:
+        Tx += 2
+    elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
 
     # glPopMatrix() 
-
     glutPostRedisplay()
 
 def main():
