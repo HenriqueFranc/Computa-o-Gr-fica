@@ -60,9 +60,8 @@ def desenha ():
     glClear(GL_COLOR_BUFFER_BIT)
 
     quadrado()
-    # triangulo()
     lines()
-    # pontos()
+
     glFlush()
 
 # Tecla ESC fecha a janela
@@ -95,13 +94,22 @@ def colisoes_das_paredes():
 def colisoes_no_labirinto():
     for t in p: 
         t_1, t_2 = t[0], t[1]
+
+        # print('Tx+maxX', Tx+maxX)
+        # print('Tx+minX', Tx+minX)
+        # print('Ty+maxY', Ty+maxY)
+        # print('Ty+minY', Ty+minY)
+        # print('-------------')
+
+        collisionX = (Tx+maxX >= t_1[0] and t_2[0] >= Tx+minX)
+
+        collisionY = (Ty+maxY >= t_1[1] and t_2[1] >= Ty+minY)
+
+
+        if collisionX and collisionY: 
+            print('Bateu no Labirinto')
+
     
-    if ( 
-        (((Tx+maxX) <= t_2[0] and (Tx+maxX) >= t_1[0]) or ((Tx+minX) <= t_2[0] and (Tx+minX) >= t_1[0])) 
-        and 
-        (((Ty+maxY) <= t_2[1] and (Ty+minY) >= t_1[1]) or ((Ty+maxY) >= t_2[1] and (Ty+minY) <= t_1[1]))
-    ):
-        print('Bateu no Labirinto')
 
     glutPostRedisplay()
 
