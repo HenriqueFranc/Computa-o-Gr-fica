@@ -2,6 +2,10 @@
 
 Projetos em OpenGL e SVG da disciplina de Computação Gráfica.
 
+**Equipe**
+- Anderson de Alencar
+- Henrique França
+
 ## Labirinto
 
 ### Execução
