@@ -18,7 +18,7 @@ p = [
 ]
 
 def lines ():
-    glColor3f(0.0, 0.0, 0.0)
+    # glColor3f(0.0, 0.0, 0.0)
     glLineWidth(3)
     for t in p: 
         t_1, t_2 = t[0], t[1]    

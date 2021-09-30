@@ -2,13 +2,15 @@ from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-
 from lines import *
+import random
 
 # Variáveis Globais para translação
 Tx = 0.0
 Ty = 0.0
-
+vidas = 3
+change = 0
+cor_1, cor_2 , cor_3 = 0,0,0 
 minX, maxX = 435, 485
 minY, maxY = 434, 484
 
@@ -22,13 +24,32 @@ def inicializa ():
     glMatrixMode(GL_MODELVIEW)
     gluOrtho2D(0.0, width, height, 0.0)   
 
+def vidas_desenho ():
+    global vidas
+    for x in range(0,vidas):
+        glPushMatrix()
+        if x == 0:
+            glTranslatef(20, 0.0, 0.0)
+        if x == 1:
+            glTranslatef(40, 0.0, 0.0)
+        if x == 2:
+            glTranslatef(60, 0.0, 0.0)
+        glBegin(GL_QUADS)
+        # glColor3f(0,0,1)  
+        glVertex3f(0, 0, 0)
+        glVertex3f(0, 10, 0)
+        glVertex3f(10, 10, 0)
+        glVertex3f(10, 0, 0)
+        glEnd()
+        glPopMatrix()
+
 def quadrado ():
     global Tx, Ty
 
     glPushMatrix()
     glTranslatef(Tx, Ty, 0.0)
     glBegin(GL_QUADS)
-    glColor3f(0,0,1)  
+    # glColor3f(0,0,1)  
     glVertex3f(435, 434, 0)
     glVertex3f(435, 484, 0)
     glVertex3f(485, 484, 0)
@@ -57,11 +78,31 @@ def pontos ():
     glEnd() 
 
 def desenha ():
-    glClear(GL_COLOR_BUFFER_BIT)
-
-    quadrado()
-    lines()
-
+    global change
+    if change == 0:
+        glColor3f(0,0,1) 
+        quadrado()
+        glColor3f(10,5,0) 
+        lines()
+        glColor3f(0,0,1) 
+        vidas_desenho()
+    if change == 1:
+        glColor3f(1,0,1) 
+        quadrado()
+        glColor3f(0,5,0) 
+        lines()
+        glColor3f(1,0,1) 
+        vidas_desenho()
+    if change == 2:
+        glColor3f(0,0,0) 
+        quadrado()
+        glColor3f(1,0,0) 
+        lines()
+        glColor3f(0,0,0) 
+        vidas_desenho()
+    
+    # glClearColor(2.0, 3.0, 1.0, 1.0)
+    
     glFlush()
 
 # Tecla ESC fecha a janela
@@ -92,6 +133,7 @@ def colisoes_das_paredes():
 
 
 def colisoes_no_labirinto():
+    global Tx, Ty , vidas
     for t in p: 
         t_1, t_2 = t[0], t[1]
 
@@ -107,24 +149,30 @@ def colisoes_no_labirinto():
 
 
         if collisionX and collisionY: 
-            print('Bateu no Labirinto')
-
+            Tx = 0
+            Ty = 0
+            vidas= vidas - 1
+            if vidas == 0:
+                 glutDestroyWindow(glutGetWindow())
+            desenha()
+            
     
 
     glutPostRedisplay()
 
+    
+def mouse (button, state, x , y):
+    global change
+    print('chamei mouse')
+    if (button == GLUT_LEFT_BUTTON):
+        if (state == GLUT_DOWN):
+                if(change == 2):
+                    change = 0
+                else:
+                    change = change + 1              
 
-# void mouse (int button, int state, int x, int y)
-# {
-#     if (button == GLUT_LEFT_BUTTON)
-#          if (state == GLUT_DOWN) {
-#                   // Troca o tamanho do retângulo, que vai do centro da 
-#                   // janela até a posição onde o usuário clicou com o mouse
-#                   xf = ( (2 * win * x) / view_w) - win
-#                   yf = ( ( (2 * win) * (y-view_h) ) / -view_h) - win
-#          }
-#     glutPostRedisplay()
-# }
+    glutPostRedisplay()
+ 
 
 def control(key, x, y):
     global Ty, Tx
@@ -147,14 +195,15 @@ def control(key, x, y):
     colisoes_no_labirinto()
     glutPostRedisplay()
 
+
 def main():
     glutInit()
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
     glutInitWindowSize(500, 500)
-    glutInitWindowPosition(500, 300)
+    #glutInitWindowPosition(500, 300)
     glutCreateWindow("Labirinto")
     glutKeyboardFunc(teclado)
-    # glutMouseFunc(mouse)
+    glutMouseFunc(mouse)
     glutSpecialFunc(control)
     glutDisplayFunc(desenha)
     inicializa()
