@@ -10,7 +10,7 @@ Projetos em OpenGL e SVG da disciplina de Computação Gráfica.
 
 ### Execução
 
-O projeto se encontra na pasta [Labirinto](https://github.com/HenriqueFranc/Projeto-CG/tree/main/Labirinto). Primeiramente, é necessário a instalação do [Conda](https://docs.conda.io/en/latest/). Em seguida é usado um ambiente virtual com as dependências do projeto. Assim, baixe o arquivo [environment.yml](https://github.com/HenriqueFranc/Projeto-CG/blob/main/OpenGLProject/environment.yml) e execute o comando no diretório onde foi salvo o arquivo. Pode ser especificado o nome do ambiente virtual na opção `env-name`.  
+O projeto foi codificado na linguagem Python e se encontra na pasta [Labirinto](https://github.com/HenriqueFranc/Projeto-CG/tree/main/Labirinto). Primeiramente, é necessário a instalação do [Conda](https://docs.conda.io/en/latest/). Em seguida é usado um ambiente virtual com as dependências do projeto. Assim, baixe o arquivo [environment.yml](https://github.com/HenriqueFranc/Projeto-CG/blob/main/Labirinto/environment.yml) e execute o comando no diretório onde foi salvo o arquivo. Pode ser especificado o nome do ambiente virtual na opção `env-name`.  
 
 ```bash
 conda env create -n env-name -f environment.yml
