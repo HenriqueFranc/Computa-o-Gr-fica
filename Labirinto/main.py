@@ -83,6 +83,7 @@ def desenha ():
     
 
     if change == 0:
+        
         glColor3f(0,0,1) 
         quadrado()
         glColor3f(10,5,0) 
@@ -90,6 +91,7 @@ def desenha ():
         glColor3f(0,0,1) 
         vidas_desenho()
     if change == 1:
+        
          glColor3f(1,0,1) 
          quadrado()
          glColor3f(0,5,0) 
@@ -97,6 +99,7 @@ def desenha ():
          glColor3f(1,0,1) 
          vidas_desenho()
     if change == 2:
+         
          glColor3f(0,0,0) 
          quadrado()
          glColor3f(1,0,0) 
@@ -104,7 +107,7 @@ def desenha ():
          glColor3f(0,0,0) 
          vidas_desenho()
     
-    
+   
     glFlush()
 
 # Tecla ESC fecha a janela
