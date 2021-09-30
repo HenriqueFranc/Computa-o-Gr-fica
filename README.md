@@ -24,6 +24,8 @@ Por fim, execute o projeto com o comando
 python3 main.py	
 ```
 
+<img src="assets/Peek 2021-09-29 23-58.gif">
+
 
 
 
