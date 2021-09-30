@@ -35,7 +35,7 @@ def vidas_desenho ():
         if x == 2:
             glTranslatef(60, 0.0, 0.0)
         glBegin(GL_QUADS)
-        # glColor3f(0,0,1)  
+        #glColor3f(0,0,1)  
         glVertex3f(0, 0, 0)
         glVertex3f(0, 10, 0)
         glVertex3f(10, 10, 0)
@@ -49,7 +49,7 @@ def quadrado ():
     glPushMatrix()
     glTranslatef(Tx, Ty, 0.0)
     glBegin(GL_QUADS)
-    # glColor3f(0,0,1)  
+    #glColor3f(0,0,1)  
     glVertex3f(435, 434, 0)
     glVertex3f(435, 484, 0)
     glVertex3f(485, 484, 0)
@@ -79,6 +79,9 @@ def pontos ():
 
 def desenha ():
     global change
+    glClear(GL_COLOR_BUFFER_BIT)
+    
+
     if change == 0:
         glColor3f(0,0,1) 
         quadrado()
@@ -87,21 +90,20 @@ def desenha ():
         glColor3f(0,0,1) 
         vidas_desenho()
     if change == 1:
-        glColor3f(1,0,1) 
-        quadrado()
-        glColor3f(0,5,0) 
-        lines()
-        glColor3f(1,0,1) 
-        vidas_desenho()
+         glColor3f(1,0,1) 
+         quadrado()
+         glColor3f(0,5,0) 
+         lines()
+         glColor3f(1,0,1) 
+         vidas_desenho()
     if change == 2:
-        glColor3f(0,0,0) 
-        quadrado()
-        glColor3f(1,0,0) 
-        lines()
-        glColor3f(0,0,0) 
-        vidas_desenho()
+         glColor3f(0,0,0) 
+         quadrado()
+         glColor3f(1,0,0) 
+         lines()
+         glColor3f(0,0,0) 
+         vidas_desenho()
     
-    # glClearColor(2.0, 3.0, 1.0, 1.0)
     
     glFlush()
 
