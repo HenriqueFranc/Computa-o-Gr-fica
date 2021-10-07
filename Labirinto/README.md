@@ -22,5 +22,5 @@ python3 main.py
 ```
 
 <p align="center">
-  <img src="./assets/Peek 2021-09-29 23-58.gif" />  
+  <img src="https://github.com/HenriqueFranc/Projeto-CG/blob/main/assets/Peek%202021-09-29%2023-58.gif" />  
 </p>
