@@ -2,8 +2,8 @@ from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-
 # Componentes
+from components.vacina import *
 from variaveis_globais import *
 
 # Impedir de avançar além das paredes
@@ -11,7 +11,7 @@ def colisoes_das_paredes():
     global Tx, Ty
     global height, width 
 
-	# Muda a direção quando chega na borda esquerda ou direita
+	# Muda a direção quando chega na bord6a esquerda ou direita
     # print('Tx+maxX', Tx+maxX)
     # print('Tx+minX', Tx+minX)
 
@@ -58,7 +58,7 @@ def inicializa ():
 
 def desenha ():
     glClear(GL_COLOR_BUFFER_BIT)
-   
+    vacina()
     glFlush()
 
 def main():
