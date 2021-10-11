@@ -6,6 +6,7 @@ from OpenGL.GLU import *
 from components.vacina import *
 from variaveis_globais import *
 
+
 # Impedir de avançar além das paredes
 def colisoes_das_paredes():
     global Tx, Ty
@@ -57,8 +58,12 @@ def inicializa ():
     gluOrtho2D(0.0, width, height, 0.0)  
 
 def desenha ():
+    global Tx,Ty
     glClear(GL_COLOR_BUFFER_BIT)
+    glPushMatrix()
+    glTranslatef(Tx, Ty, 0.0)
     vacina()
+    glPopMatrix()
     glFlush()
 
 def main():
