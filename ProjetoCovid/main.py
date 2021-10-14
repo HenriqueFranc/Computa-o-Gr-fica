@@ -60,10 +60,12 @@ def inicializa ():
 def desenha ():
     global Tx,Ty
     glClear(GL_COLOR_BUFFER_BIT)
+
     glPushMatrix()
     glTranslatef(Tx, Ty, 0.0)
     vacina()
     glPopMatrix()
+    
     glFlush()
 
 def main():

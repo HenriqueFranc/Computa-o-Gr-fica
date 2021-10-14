@@ -15,7 +15,8 @@ def vacina():
     
    
     glBegin(GL_QUADS)
-    glColor3f(0.25,0.50,0.55)
+    # glColor3f(0.25,0.50,0.55)
+    glColor3f(116/255, 185/255, 255/255)
     glVertex3f(300, 400, 0)
     glVertex3f(300, 440, 0)
     glVertex3f(325, 440, 0)
