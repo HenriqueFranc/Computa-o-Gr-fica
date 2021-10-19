@@ -2,18 +2,17 @@
 Tx = 0.0
 Ty = 0.0
 atirou = False
+colisãoCima = False
+colisãoBaixo = False
+colisãoEsquerda= False
+colisãoDireita = False
 # Tamanho da Janela
 height, width = 500, 500
-
+maxY = 450
+minY = 390
+minX = 290
+maxX = 335
 moverX = 0
 moverY = 0
 posicaoX = 0
 posicaoY = 0
-x1 = 312.5
-y1 = 390
-x2 = 312.5
-y2 = 400
-x3 = 314.5
-y3 = 400
-x4 = 314.5
-y4 = 390

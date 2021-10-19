@@ -10,23 +10,42 @@ from components.bala_player import*
 
 # Impedir de avançar além das paredes
 def colisoes_das_paredes():
-    global Tx, Ty
+    global Tx, Ty ,maxX, minX, maxY,minY, colisãoDireita,colisãoEsquerda,colisãoCima,colisãoBaixo
     global height, width 
 
 	# Muda a direção quando chega na bord6a esquerda ou direita
     # print('Tx+maxX', Tx+maxX)
     # print('Tx+minX', Tx+minX)
-
-    if ( (Tx+maxX) > width or (Tx+minX) < 0 ):
-        print('Bateu na Parede')
-
+    if ((Tx+maxX) > width):
+        print('colisão direita')
+        colisãoDireita = True
+        if (Ty+maxY) > height :
+            colisãoBaixo = True
+        elif (Ty+minY) < 0 :
+            colisãoCima = True
+    elif ( (Tx+minX) < 0 ):
+        print('colisão esquerda')
+        colisãoEsquerda = True
+        if (Ty+maxY) > height :
+            colisãoBaixo = True
+        elif (Ty+minY) < 0 :
+            colisãoCima = True
     # print('Ty+maxY', Ty+maxY)
     # print('Ty+minY', Ty+minY)
     # print()
 	# Muda a direção quando chega na borda superior ou inferior
-    if( (Ty+maxY) > height or (Ty+minY) < 0 ):
-        print('Bateu na Parede')
- 
+    elif( (Ty+maxY) > height ):
+        print('colisão baixo')
+        colisãoBaixo = True
+    elif ((Ty+minY) < 0) :
+         print('colisão cima')
+         colisãoCima = True
+    else:
+        colisãoEsquerda = False
+        colisãoDireita = False
+        colisãoCima = False
+        colisãoBaixo = False
+        
 	# Redesenha a casinha em outra posição
     glutPostRedisplay()
 
@@ -43,19 +62,24 @@ def GerenciaTeclado(key, x , y):
 
 # Controle do Teclado
 def control(key, x, y):
-    global Ty, Tx, posicaoY,posicaoX
-    step = 10
+    global Ty, Tx, posicaoY,posicaoX,colisão
+    step = 5
   
-    
+    colisoes_das_paredes()
     # print(Tx, Ty)
+    
     if key == GLUT_KEY_UP:
-        Ty -= step
+        if colisãoCima == False:
+            Ty -= step
     elif key == GLUT_KEY_DOWN:
-        Ty += step
+        if colisãoBaixo == False:
+            Ty += step
     elif key == GLUT_KEY_LEFT:
-        Tx -= step
+        if colisãoEsquerda == False:
+            Tx -= step
     elif key == GLUT_KEY_RIGHT:
-        Tx += step
+        if colisãoDireita == False:
+            Tx += step
     elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
     glutPostRedisplay()
@@ -100,8 +124,8 @@ def animaTiroInimigo(value):
     global posicaoY,y1,atirou
 
     posicaoY += posicaoY - 1
-    
-    if((y1 + posicaoY) < 0):
+
+    if((390 + posicaoY) < 0):
         atirou = False
         posicaoY = 0
         
