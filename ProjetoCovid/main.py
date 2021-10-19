@@ -2,11 +2,14 @@ from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+
 # Componentes
 from components.vacina import *
+from components.covid import *
 from variaveis_globais import *
 from components.bala_player import*
 
+covid = Covid()
 
 # Impedir de avançar além das paredes
 def colisoes_das_paredes():
@@ -52,6 +55,9 @@ def colisoes_das_paredes():
 
 def GerenciaTeclado(key, x , y):
     global atirou,moverX,moverY,Tx,Ty
+
+    print(x,y)
+
     if key == b' ':
         atirou= True
         moverX = Tx
@@ -101,17 +107,23 @@ def desenha ():
     glTranslatef(Tx, Ty, 0.0)
     vacina()
     glPopMatrix()
+
+    covid.desenhar()
+    covid.bala()
+    
     if (atirou == True) :
         glPushMatrix()
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
         glutTimerFunc(100,animaTiroInimigo,100)
-    glFlush()
+
+
+    glutSwapBuffers()
 
 def main():
     glutInit()
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
     glutInitWindowSize(500, 500)
     glutCreateWindow("Covid Exterminator")
     glutSpecialFunc(control)
