@@ -3,6 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from variaveis_globais import *
+from components.bala_player import *
 
 def vacina():
     glLineWidth(2)
@@ -38,5 +39,5 @@ def vacina():
     glVertex2i(290, 450)
     glVertex2i(335, 450)
     glEnd()
-    
+
     
