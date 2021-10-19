@@ -5,6 +5,7 @@ from OpenGL.GLU import *
 # Componentes
 from components.vacina import *
 from variaveis_globais import *
+from components.bala_player import*
 
 
 # Impedir de avançar além das paredes
@@ -29,13 +30,24 @@ def colisoes_das_paredes():
 	# Redesenha a casinha em outra posição
     glutPostRedisplay()
 
+
+def GerenciaTeclado(key, x , y):
+    global atirou,moverX,moverY,Tx,Ty
+    if key == b' ':
+        atirou= True
+        moverX = Tx
+        moverY= Ty
+    
+    glutPostRedisplay()
+
+
 # Controle do Teclado
 def control(key, x, y):
-    global Ty, Tx
+    global Ty, Tx, posicaoY,posicaoX
     step = 10
   
-    # print(Tx, Ty)
     
+    # print(Tx, Ty)
     if key == GLUT_KEY_UP:
         Ty -= step
     elif key == GLUT_KEY_DOWN:
@@ -46,7 +58,6 @@ def control(key, x, y):
         Tx += step
     elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
-     
     glutPostRedisplay()
 
 
@@ -55,15 +66,22 @@ def inicializa ():
 
     glClearColor(2.0, 3.0, 1.0, 1.0)
     glMatrixMode(GL_MODELVIEW)
-    gluOrtho2D(0.0, width, height, 0.0)  
+    gluOrtho2D(0.0, width, height, 0.0)
+     
 
 def desenha ():
-    global Tx,Ty
+    global Tx,Ty, posicaoY,posicaoX,atirou
     glClear(GL_COLOR_BUFFER_BIT)
     glPushMatrix()
     glTranslatef(Tx, Ty, 0.0)
     vacina()
     glPopMatrix()
+    if (atirou == True) :
+        glPushMatrix()
+        glTranslatef(posicaoX,posicaoY,0)
+        criarBala(moverX,moverY)
+        glPopMatrix()
+        glutTimerFunc(100,animaTiroInimigo,100)
     glFlush()
 
 def main():
@@ -72,9 +90,22 @@ def main():
     glutInitWindowSize(500, 500)
     glutCreateWindow("Covid Exterminator")
     glutSpecialFunc(control)
+    glutKeyboardFunc(GerenciaTeclado)
     glutDisplayFunc(desenha)
     inicializa()
     glutMainLoop()
 
+def animaTiroInimigo(value):
+    global posicaoY,y1,atirou
+
+    posicaoY += posicaoY - 1
+    if((y1 + posicaoY) < 0):
+        atirou = False
+        inicializaBala_player()
+        
+       
+
+    glutPostRedisplay()
+    # glutTimerFunc(200,animaTiroInimigo,1)
 
 main()
