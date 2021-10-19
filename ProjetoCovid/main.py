@@ -100,9 +100,11 @@ def animaTiroInimigo(value):
     global posicaoY,y1,atirou
 
     posicaoY += posicaoY - 1
+    
     if((y1 + posicaoY) < 0):
         atirou = False
-        inicializaBala_player()
+        posicaoY = 0
+        
         
        
 
