@@ -2,10 +2,13 @@ from OpenGL import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+
 # Componentes
 from components.vacina import *
+from components.covid import *
 from variaveis_globais import *
 
+covid = Covid()
 
 # Impedir de avançar além das paredes
 def colisoes_das_paredes():
@@ -65,6 +68,8 @@ def desenha ():
     glTranslatef(Tx, Ty, 0.0)
     vacina()
     glPopMatrix()
+
+    covid.desenhar()
     
     glFlush()
 
