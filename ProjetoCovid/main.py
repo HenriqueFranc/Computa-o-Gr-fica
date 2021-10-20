@@ -4,21 +4,19 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
 # Componentes
+from variaveis_globais import *
 from components.vacina import *
 from components.covid import *
-from variaveis_globais import *
+from components.menu import *
 from components.bala_player import*
 
 covid = Covid()
+menu = Menu()
 
 # Impedir de avançar além das paredes
 def colisoes_das_paredes():
-    global Tx, Ty ,maxX, minX, maxY,minY, colisãoDireita,colisãoEsquerda,colisãoCima,colisãoBaixo
-    global height, width 
+    global Tx, Ty , maxX, minX, maxY,minY, colisãoDireita, colisãoEsquerda, colisãoCima,colisãoBaixo, height, width 
 
-	# Muda a direção quando chega na bord6a esquerda ou direita
-    # print('Tx+maxX', Tx+maxX)
-    # print('Tx+minX', Tx+minX)
     if ((Tx+maxX) > width):
         print('colisão direita')
         colisãoDireita = True
@@ -33,10 +31,6 @@ def colisoes_das_paredes():
             colisãoBaixo = True
         elif (Ty+minY) < 0 :
             colisãoCima = True
-    # print('Ty+maxY', Ty+maxY)
-    # print('Ty+minY', Ty+minY)
-    # print()
-	# Muda a direção quando chega na borda superior ou inferior
     elif( (Ty+maxY) > height ):
         print('colisão baixo')
         colisãoBaixo = True
@@ -49,30 +43,29 @@ def colisoes_das_paredes():
         colisãoCima = False
         colisãoBaixo = False
         
-	# Redesenha a casinha em outra posição
     glutPostRedisplay()
 
-
-def GerenciaTeclado(key, x , y):
-    global atirou,moverX,moverY,Tx,Ty
+def controle_teclas_alfanumericas(key, x , y):
+    global atirou,moverX,moverY,Tx,Ty, menuAtivado
 
     print(x,y)
-
+    
     if key == b' ':
         atirou= True
         moverX = Tx
-        moverY= Ty
+        moverY = Ty
+    elif key == b'1':
+        menuAtivado = not menuAtivado
+    elif key == b'\x1b':
+        glutDestroyWindow(glutGetWindow())
     
     glutPostRedisplay()
 
-
-# Controle do Teclado
-def control(key, x, y):
+def controle_teclas_especiais(key, x, y):
     global Ty, Tx, posicaoY,posicaoX,colisão
-    step = 5
+    step = 15
   
     colisoes_das_paredes()
-    # print(Tx, Ty)
     
     if key == GLUT_KEY_UP:
         if colisãoCima == False:
@@ -85,12 +78,21 @@ def control(key, x, y):
             Tx -= step
     elif key == GLUT_KEY_RIGHT:
         if colisãoDireita == False:
-            Tx += step
-    elif key == b'\x1b':
-        glutDestroyWindow(glutGetWindow())
+            Tx += step 
+
     glutPostRedisplay()
 
+def anima_tiro_inimigo(value):
+    global posicaoY,y1,atirou
 
+    posicaoY += posicaoY - 1
+
+    if((390 + posicaoY) < 0):
+        atirou = False
+        posicaoY = 0
+        
+    glutPostRedisplay()
+    
 def inicializa ():
     global width, height
 
@@ -98,25 +100,27 @@ def inicializa ():
     glMatrixMode(GL_MODELVIEW)
     gluOrtho2D(0.0, width, height, 0.0)
      
-
 def desenha ():
     global Tx,Ty, posicaoY,posicaoX,atirou
-    glClear(GL_COLOR_BUFFER_BIT)
-
-    glPushMatrix()
-    glTranslatef(Tx, Ty, 0.0)
-    vacina()
-    glPopMatrix()
-
-    covid.desenhar()
-    covid.bala()
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     
+    if menuAtivado:
+        menu.desenhar()
+    else:
+        glPushMatrix()
+        glTranslatef(Tx, Ty, 0.0)
+        vacina()
+        glPopMatrix()
+
+        covid.desenhar()
+        covid.bala()
+  
     if (atirou == True) :
         glPushMatrix()
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
-        glutTimerFunc(100,animaTiroInimigo,100)
+        glutTimerFunc(100, anima_tiro_inimigo,100)
 
 
     glutSwapBuffers()
@@ -126,25 +130,10 @@ def main():
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
     glutInitWindowSize(500, 500)
     glutCreateWindow("Covid Exterminator")
-    glutSpecialFunc(control)
-    glutKeyboardFunc(GerenciaTeclado)
+    glutSpecialFunc(controle_teclas_especiais)
+    glutKeyboardFunc(controle_teclas_alfanumericas)
     glutDisplayFunc(desenha)
     inicializa()
     glutMainLoop()
-
-def animaTiroInimigo(value):
-    global posicaoY,y1,atirou
-
-    posicaoY += posicaoY - 1
-
-    if((390 + posicaoY) < 0):
-        atirou = False
-        posicaoY = 0
-        
-        
-       
-
-    glutPostRedisplay()
-    # glutTimerFunc(200,animaTiroInimigo,1)
 
 main()
