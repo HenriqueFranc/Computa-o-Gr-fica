@@ -55,6 +55,18 @@ def colisoes_covid():
         colisãoCovidEsquerda = True
         colisãoCovidDireita = False
 
+def atingir_bala_vacina():
+    global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx
+
+    colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ( (xbala + moverX) >= (minXcovid + covidTx))
+    colisionY = (((yminbala + moverY) + posicaoY) >= (maxYcovid))
+    
+    if colisionX and colisionY:
+        print('acertou em x e y')
+        covid.dano = covid.dano + 7
+
+    
+
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
@@ -106,8 +118,9 @@ def controle_mouse(button, state, x, y):
     glutPostRedisplay()
 
 def anima_tiro_player(value):
-    global posicaoY,y1,atirou
+    global posicaoY,y1,atirou,covidTx
 
+    atingir_bala_vacina()
     posicaoY += posicaoY - 1
 
     if(((390.0 + moverY) + posicaoY) < 0):
@@ -182,7 +195,7 @@ def desenha ():
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
-        glutTimerFunc(100, anima_tiro_player,100)
+        glutTimerFunc(1000, anima_tiro_player,1)
 
 
     glutSwapBuffers()

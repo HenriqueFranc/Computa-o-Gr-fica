@@ -6,6 +6,8 @@ from OpenGL.GLU import *
 from variaveis_globais import *
 import math
 
+
+
 def desenhar_circulo(x, y, radius):
     triangleAmount = 800
     twicePi = 2.0 * math.pi
@@ -33,6 +35,9 @@ def desenhar_rect(x, y, type):
         glEnd()  
 
 class Covid():
+    def __init__(self):
+        self.dano = 0
+
     def desenhar(self):
         glPushMatrix()
         glTranslatef(0, 50, 0)  
@@ -119,6 +124,6 @@ class Covid():
         glBegin(GL_QUADS)
         glVertex3f(x, y, 0)
         glVertex3f(x, y + 20, 0)
-        glVertex3f(x + 70, y + 20, 0)
-        glVertex3f(x + 70, y, 0)
+        glVertex3f(x + 70 - self.dano, y + 20, 0)
+        glVertex3f(x + 70 - self.dano, y, 0)
         glEnd() 
