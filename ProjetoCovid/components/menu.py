@@ -21,7 +21,7 @@ class Menu():
         glPushMatrix()
         glTranslatef(-30,0, 0)
         glScalef(5, 5, 5)
-        covid.bala()
+        covid.bala(0)
         glPopMatrix()   
 
         glColor3f(0, 0, 0)

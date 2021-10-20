@@ -100,9 +100,9 @@ class Covid():
         desenhar_circulo(220, 130, 20)
         desenhar_circulo(273, 186, 10)
 
-    def bala(self): 
+    def bala(self, covidTx): 
         glPushMatrix()
-        glTranslatef(10, 10, 0)
+        glTranslatef( 200 + covidTx,150, 0)
         glScalef(0.2,0.2,0.2)
         self.desenhar()
         glPopMatrix()

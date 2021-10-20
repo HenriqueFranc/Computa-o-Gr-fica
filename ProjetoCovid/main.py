@@ -17,24 +17,24 @@ def colisoes_das_paredes():
     global Tx, Ty , maxX, minX, maxY,minY, colisãoDireita, colisãoEsquerda, colisãoCima,colisãoBaixo, height, width 
 
     if ((Tx+maxX) > width):
-        print('colisão direita')
+        
         colisãoDireita = True
         if (Ty+maxY) > height :
             colisãoBaixo = True
         elif (Ty+minY) < 0 :
             colisãoCima = True
     elif ( (Tx+minX) < 0 ):
-        print('colisão esquerda')
+        
         colisãoEsquerda = True
         if (Ty+maxY) > height :
             colisãoBaixo = True
         elif (Ty+minY) < 0 :
             colisãoCima = True
     elif( (Ty+maxY) > height ):
-        print('colisão baixo')
+        
         colisãoBaixo = True
     elif ((Ty+minY) < 0) :
-         print('colisão cima')
+        
          colisãoCima = True
     else:
         colisãoEsquerda = False
@@ -44,10 +44,20 @@ def colisoes_das_paredes():
         
     glutPostRedisplay()
 
+def colisoes_covid():
+    global maxXcovid, minXcovid,covidTx,colisãoCovidDireita,colisãoCovidEsquerda
+
+    if ((covidTx + maxXcovid) > width):
+        colisãoCovidDireita = True
+        colisãoCovidEsquerda = False
+
+    elif ( (covidTx + minXcovid) < 0 ):
+        colisãoCovidEsquerda = True
+        colisãoCovidDireita = False
+
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
 
-    print(x,y)
     
     if key == b' ':
         atirou= True
@@ -81,7 +91,7 @@ def controle_teclas_especiais(key, x, y):
 
     glutPostRedisplay()
 
-def anima_tiro_inimigo(value):
+def anima_tiro_player(value):
     global posicaoY,y1,atirou
 
     posicaoY += posicaoY - 1
@@ -91,6 +101,35 @@ def anima_tiro_inimigo(value):
         posicaoY = 0
         
     glutPostRedisplay()
+
+def anima_tiro_inimigo(value):
+    global posicaoYinimigo,posicaoXinimigo
+    
+
+    posicaoYinimigo += posicaoYinimigo + 1
+
+    if((150 + posicaoYinimigo) > height):
+        posicaoYinimigo = 0
+        
+    glutPostRedisplay()
+    glutTimerFunc(500, anima_tiro_inimigo,10)
+
+def anima_covid(value):
+    global covidTx,colisãoCovidEsquerda,colisãoCovidDireita
+    num= 10
+    colisoes_covid()
+
+    if (colisãoCovidEsquerda == True):
+        num = 10
+        
+
+    elif (colisãoCovidDireita == True):
+        num = -10
+        
+    
+    covidTx = covidTx + num
+    glutPostRedisplay()
+    glutTimerFunc(100, anima_covid,100)
     
 def inicializa ():
     global width, height
@@ -110,9 +149,17 @@ def desenha ():
         glTranslatef(Tx, Ty, 0.0)
         vacina()
         glPopMatrix()
-
+        
+        glPushMatrix()
+        glTranslatef(covidTx, 0.0, 0.0)
         covid.desenhar()
-        covid.bala()
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(posicaoXinimigo,posicaoYinimigo,0)
+        covid.bala(covidTx)
+        glPopMatrix()
+
         covid.barra_de_vida()
   
     if (atirou == True) :
@@ -120,7 +167,7 @@ def desenha ():
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
-        glutTimerFunc(100, anima_tiro_inimigo,100)
+        glutTimerFunc(100, anima_tiro_player,100)
 
 
     glutSwapBuffers()
@@ -134,6 +181,8 @@ def main():
     glutKeyboardFunc(controle_teclas_alfanumericas)
     glutDisplayFunc(desenha)
     inicializa()
+    glutTimerFunc(500, anima_tiro_inimigo,10)
+    glutTimerFunc(100, anima_covid,100)
     glutMainLoop()
 
 main()
