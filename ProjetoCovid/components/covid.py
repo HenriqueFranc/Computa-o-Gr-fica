@@ -98,7 +98,7 @@ class Covid():
         
         glColor3f(1, 1, 1)
         desenhar_circulo(220, 130, 20)
-        desenhar_circulo(273, 186, 10)
+        desenhar_circulo(285, 180, 10)
 
     def bala(self, covidTx): 
         glPushMatrix()
@@ -122,6 +122,3 @@ class Covid():
         glVertex3f(x + 70, y + 20, 0)
         glVertex3f(x + 70, y, 0)
         glEnd() 
-
-
-

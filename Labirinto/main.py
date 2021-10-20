@@ -168,6 +168,11 @@ def colisoes_no_labirinto():
     
 def mouse (button, state, x , y):
     global change
+<<<<<<< HEAD
+=======
+    print('chamei mouse')
+    
+>>>>>>> 26955bd6a297e9bcb80c4c25050d072d235f0a00
     if (button == GLUT_LEFT_BUTTON):
         if (state == GLUT_DOWN):
                 if(change == 2):
