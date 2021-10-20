@@ -106,6 +106,22 @@ class Covid():
         glScalef(0.2,0.2,0.2)
         self.desenhar()
         glPopMatrix()
+    
+    def barra_de_vida(self):
+        glColor3f(0, 0, 0)
+        glRasterPos2f(440, 60)       
+        for i in 'Vida':
+            glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ord(i))
+
+        x = 420
+        y = 20
+        glColor3f(235/255, 47/255, 6/255)
+        glBegin(GL_QUADS)
+        glVertex3f(x, y, 0)
+        glVertex3f(x, y + 20, 0)
+        glVertex3f(x + 70, y + 20, 0)
+        glVertex3f(x + 70, y, 0)
+        glEnd() 
 
 
 

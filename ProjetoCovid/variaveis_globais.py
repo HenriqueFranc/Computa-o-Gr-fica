@@ -24,6 +24,5 @@ moverY = 0
 posicaoX = 0
 posicaoY = 0
 
-
 # Variáveis do Menu
 menuAtivado = True

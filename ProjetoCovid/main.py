@@ -13,7 +13,6 @@ from components.bala_player import*
 covid = Covid()
 menu = Menu()
 
-# Impedir de avançar além das paredes
 def colisoes_das_paredes():
     global Tx, Ty , maxX, minX, maxY,minY, colisãoDireita, colisãoEsquerda, colisãoCima,colisãoBaixo, height, width 
 
@@ -114,6 +113,7 @@ def desenha ():
 
         covid.desenhar()
         covid.bala()
+        covid.barra_de_vida()
   
     if (atirou == True) :
         glPushMatrix()
