@@ -68,10 +68,6 @@ def atingir_bala_vacina():
     else:
         atingiu = False
 
-
-
-
-
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
