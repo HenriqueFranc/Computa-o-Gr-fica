@@ -202,7 +202,6 @@ def desenha ():
         glPopMatrix()
         glutTimerFunc(1, anima_tiro_player,1)
 
-
     glutSwapBuffers()
 
 def main():

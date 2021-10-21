@@ -1,18 +1,10 @@
-# To Do
+# Covid Destroyer
 
-**Anderson**
+Jogo arcade de uma vacina contra o coronavírus feito em OpenGL.
 
-- [x] Desenhar Covid
-- [x] Menu e interação com textos
+![](./assets/corona-gif.gif)
 
-**Henrique**
+**Equipe**
 
-- [x] Fazer a bala do player 
-- [x] Fazer a bala do covid
-- [x] Fazer barra de espaço atirar, ESC para sair e ENTER para pausa
-
-**Outros**
-
-- [x] Colisões com a parede (não ultrapassar a tela)
-- [ ] Colisões das balas
-- [ ] Barra de Vida
+- Anderson de Alencar
+- Henrique França

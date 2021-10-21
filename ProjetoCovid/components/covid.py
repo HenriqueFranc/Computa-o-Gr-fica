@@ -13,7 +13,10 @@ def desenhar_circulo(x, y, radius):
     glBegin(GL_TRIANGLE_FAN)
     glVertex2f(x, y)
     for i in range (0, triangleAmount): 
-        glVertex2f(x + (radius * math.cos(i *  twicePi / triangleAmount)), y + (radius * math.sin(i * twicePi / triangleAmount)))
+        glVertex2f(
+            x + (radius * math.cos(i *  twicePi / triangleAmount)), 
+            y + (radius * math.sin(i * twicePi / triangleAmount))
+        )
     glEnd()
 
 def desenhar_rect(x, y, type):
