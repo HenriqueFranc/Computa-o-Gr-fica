@@ -56,14 +56,21 @@ def colisoes_covid():
         colisãoCovidDireita = False
 
 def atingir_bala_vacina():
-    global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx
+    global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx,atingiu
 
     colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ( (xbala + moverX) >= (minXcovid + covidTx))
-    colisionY = (((yminbala + moverY) + posicaoY) >= (maxYcovid))
+    colisionY = (((yminbala + moverY) + posicaoY) <= (maxYcovid)) 
     
     if colisionX and colisionY:
         print('acertou em x e y')
         covid.dano = covid.dano + 7
+        atingiu = True
+    else:
+        atingiu = False
+
+
+
+
 
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
@@ -117,14 +124,16 @@ def controle_mouse(button, state, x, y):
     glutPostRedisplay()
 
 def anima_tiro_player(value):
-    global posicaoY,y1,atirou,covidTx
+    global posicaoY,y1,atirou,covidTx,atingiu
 
     atingir_bala_vacina()
-    posicaoY += posicaoY - 1
+    if atingiu == False:
+        posicaoY = posicaoY - 20
 
-    if(((390.0 + moverY) + posicaoY) < 0):
+    if(((390.0 + moverY) + posicaoY) < 0) or atingiu:
         atirou = False
         posicaoY = 0
+        atingiu = False
         
     glutPostRedisplay()
 
@@ -156,7 +165,7 @@ def anima_covid(value):
     
     covidTx = covidTx + num
     glutPostRedisplay()
-    glutTimerFunc(100, anima_covid,100)
+    glutTimerFunc(10, anima_covid,1)
     
 def inicializa ():
     global width, height
@@ -197,7 +206,7 @@ def desenha ():
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
-        glutTimerFunc(1000, anima_tiro_player,1)
+        glutTimerFunc(1, anima_tiro_player,1)
 
 
     glutSwapBuffers()
@@ -213,7 +222,7 @@ def main():
     glutDisplayFunc(desenha) 
     inicializa()
     glutTimerFunc(500, anima_tiro_inimigo,10)
-    glutTimerFunc(100, anima_covid,100)
+    glutTimerFunc(1, anima_covid,1)
     glutMainLoop()
 
 main()
