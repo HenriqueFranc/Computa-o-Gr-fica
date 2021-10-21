@@ -92,7 +92,6 @@ def controle_teclas_especiais(key, x, y):
 
     glutPostRedisplay()
 
-
 def controle_mouse(button, state, x, y):
     global menuAtivado
     
@@ -119,7 +118,6 @@ def anima_tiro_player(value):
 def anima_tiro_inimigo(value):
     global posicaoYinimigo,posicaoXinimigo
     
-
     posicaoYinimigo += posicaoYinimigo + 1
 
     if((150 + posicaoYinimigo) > height):
@@ -130,7 +128,9 @@ def anima_tiro_inimigo(value):
 
 def anima_covid(value):
     global covidTx,colisãoCovidEsquerda,colisãoCovidDireita
-    num= 10
+
+    num = 10
+
     colisoes_covid()
 
     if (colisãoCovidEsquerda == True):
@@ -145,7 +145,6 @@ def anima_covid(value):
     glutPostRedisplay()
     glutTimerFunc(100, anima_covid,100)
     
- 
 def inicializa ():
     global width, height
 
@@ -188,9 +187,11 @@ def desenha ():
     glutSwapBuffers()
 
 def main():
+    global width, height
+    
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
-    glutInitWindowSize(500, 500)
+    glutInitWindowSize(width, height)
     glutCreateWindow("Covid Exterminator")
     glutSpecialFunc(controle_teclas_especiais)
     glutKeyboardFunc(controle_teclas_alfanumericas)

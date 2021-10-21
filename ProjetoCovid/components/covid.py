@@ -34,7 +34,7 @@ def desenhar_rect(x, y, type):
 
 class Covid():
     def desenhar(self):
-        glPushMatrix()
+        glPushMatrix()      
         glTranslatef(0, 50, 0)  
 
         glColor3f(235/255, 47/255, 6/255)

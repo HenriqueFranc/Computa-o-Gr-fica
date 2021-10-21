@@ -11,6 +11,7 @@ colisãoDireita = False
 
 colisãoCovidEsquerda=  False
 colisãoCovidDireita=  False
+
 # Tamanho da Janela
 height, width = 500, 500
 
@@ -30,5 +31,6 @@ posicaoX = 0
 posicaoY = 0
 posicaoXinimigo = 0
 posicaoYinimigo = 0
+
 # Variáveis do Menu
 menuAtivado = True
