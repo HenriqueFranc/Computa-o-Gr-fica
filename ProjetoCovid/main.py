@@ -67,7 +67,12 @@ def atingir_bala_vacina():
         atingiu = True
     else:
         atingiu = False
-
+def atingir_bala_covid():
+    global posicaoYinimigo,Tx,Ty,minX,maxX,minY,maxY,covidTx
+    colisionX = (Tx + minX ) >= (250 + covidTx) and (250 + covidTx) <=(Tx + maxX)
+    colisionY = (150 + posicaoYinimigo) >= (minY + Ty)
+    if colisionX and colisionY :
+        print('game over')
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
@@ -135,7 +140,7 @@ def anima_tiro_player(value):
 def anima_tiro_inimigo(value):
     global posicaoYinimigo,posicaoXinimigo
     
-
+    atingir_bala_covid()
     posicaoYinimigo += posicaoYinimigo + 1
 
     if((150 + posicaoYinimigo) > height):
