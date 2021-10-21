@@ -12,8 +12,7 @@ Jogo arcade de uma vacina contra o coronavírus feito em OpenGL.
 | 1      | Reinicia o Jogo            |
 | ESC    | Sair do Jogo e fecha a tel |
 | Setas  | Mover Vacina               |
-| Espaço | Atirar                     |
-|        |                            |
+| Espaço | Atirar                     | 
 
 **Equipe**
 

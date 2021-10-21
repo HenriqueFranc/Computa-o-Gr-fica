@@ -58,7 +58,8 @@ def colisoes_covid():
 def colisoes_bala_vacina():
     global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx,atingiu
 
-    colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ( (xbala + moverX) >= (minXcovid + covidTx))
+    colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ((xbala + moverX) >= (minXcovid + covidTx))
+
     colisionY = (((yminbala + moverY) + posicaoY) <= (maxYcovid)) 
     
     if colisionX and colisionY:
