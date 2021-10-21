@@ -62,7 +62,6 @@ def atingir_bala_vacina():
     colisionY = (((yminbala + moverY) + posicaoY) <= (maxYcovid)) 
     
     if colisionX and colisionY:
-        print('acertou em x e y')
         covid.dano = covid.dano + 7
         atingiu = True
     else:
@@ -80,7 +79,7 @@ def atingir_bala_vacina():
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
-    print(x, y)
+    
 
     if key == b' ':
         atirou= True
@@ -211,7 +210,6 @@ def desenha ():
         criarBala(moverX,moverY)
         glPopMatrix()
         glutTimerFunc(1, anima_tiro_player,1)
-
 
     glutSwapBuffers()
 
