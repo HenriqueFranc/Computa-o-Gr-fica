@@ -67,12 +67,16 @@ def atingir_bala_vacina():
         atingiu = True
     else:
         atingiu = False
-def atingir_bala_covid():
-    global posicaoYinimigo,Tx,Ty,minX,maxX,minY,maxY,covidTx
-    colisionX = (Tx + minX ) >= (250 + covidTx) and (250 + covidTx) <=(Tx + maxX)
-    colisionY = (150 + posicaoYinimigo) >= (minY + Ty)
-    if colisionX and colisionY :
-        print('game over')
+     
+# def atingir_bala_covid():
+#     global posicaoYTiroinimigo,Tx,Ty,minX,maxX,minY,maxY,covidTx
+
+#     colisionX = (Tx + 300 ) >= (26.2 + covidTx) and ((Tx + 325) <= (73.8 + covidTx))
+#     colisionY = (150 + posicaoYTiroinimigo) >= (minY + Ty)
+
+#     if colisionX and colisionY:
+#         print('game over')
+        
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
@@ -84,6 +88,7 @@ def controle_teclas_alfanumericas(key, x , y):
         moverY = Ty
     elif key == b'1':
         menuAtivado = not menuAtivado
+        covid.dano = 0
     elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
     
@@ -110,7 +115,6 @@ def controle_teclas_especiais(key, x, y):
 
     glutPostRedisplay()
 
-
 def controle_mouse(button, state, x, y):
     global menuAtivado
     
@@ -118,6 +122,7 @@ def controle_mouse(button, state, x, y):
         if (state == GLUT_DOWN):
             if (x > 200 and  x < 300) and (y > 328 and y < 368):
                 menuAtivado = not menuAtivado
+                covid.dano = 0
             if (x > 200 and  x < 300) and (y > 410 and y < 450):
                 glutDestroyWindow(glutGetWindow())
 
@@ -138,35 +143,34 @@ def anima_tiro_player(value):
     glutPostRedisplay()
 
 def anima_tiro_inimigo(value):
-    global posicaoYinimigo,posicaoXinimigo
+    global posicaoYTiroinimigo,posicaoXTiroinimigo
     
-    atingir_bala_covid()
-    posicaoYinimigo += posicaoYinimigo + 1
+    # atingir_bala_covid()
+    posicaoYTiroinimigo += posicaoYTiroinimigo + 1
 
-    if((150 + posicaoYinimigo) > height):
-        posicaoYinimigo = 0
+    if((150 + posicaoYTiroinimigo) > height):
+        posicaoYTiroinimigo = 0
         
     glutPostRedisplay()
     glutTimerFunc(500, anima_tiro_inimigo,10)
 
 def anima_covid(value):
     global covidTx,colisãoCovidEsquerda,colisãoCovidDireita
-    num= 10
+
+    num = 10
+
     colisoes_covid()
 
     if (colisãoCovidEsquerda == True):
         num = 10
         
-
     elif (colisãoCovidDireita == True):
         num = -10
         
-    
     covidTx = covidTx + num
     glutPostRedisplay()
-    glutTimerFunc(10, anima_covid,1)
+    glutTimerFunc(50, anima_covid,1)
     
- 
 def inicializa ():
     global width, height
 
@@ -175,11 +179,14 @@ def inicializa ():
     gluOrtho2D(0.0, width, height, 0.0)
      
 def desenha ():
-    global Tx,Ty, posicaoY,posicaoX,atirou
+    global Tx,Ty, posicaoY,posicaoX,atirou, game_over
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     
     if menuAtivado:
         menu.desenhar()
+    elif covid.dano >= 70: 
+        menu.fim_de_jogo()
     else:
         glPushMatrix()
         glTranslatef(Tx, Ty, 0.0)
@@ -192,7 +199,7 @@ def desenha ():
         glPopMatrix()
 
         glPushMatrix()
-        glTranslatef(posicaoXinimigo,posicaoYinimigo,0)
+        glTranslatef(posicaoXTiroinimigo,posicaoYTiroinimigo,0)
         covid.bala(covidTx)
         glPopMatrix()
 

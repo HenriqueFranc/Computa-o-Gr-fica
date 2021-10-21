@@ -5,40 +5,41 @@ from OpenGL.GLU import *
 
 from components.covid import Covid
 
-def desenhar_rect_oco(x,y):
+def desenhar_rect_oco(x, y, w, h):
     glBegin(GL_LINE_LOOP)
     glVertex3f(x, y, 0)
-    glVertex3f(x, y + 40, 0)
-    glVertex3f(x + 100, y + 40, 0)
-    glVertex3f(x + 100, y, 0)
+    glVertex3f(x, y + h, 0)
+    glVertex3f(x + w, y + h, 0)
+    glVertex3f(x + w, y, 0)
     glEnd()
 
+def desenhar_texto(x , y, font, text ):
+    glRasterPos2f(x, y)
+    for i in text:
+        glutBitmapCharacter(font, ord(i))
+        
 class Menu():
     def desenhar(self):
-        # covid = Covid()
 
         title = 'Covid Destroyer'
         start = 'Iniciar'
         quit = 'Sair'
 
         glColor3f(0, 0, 0)
-        glRasterPos2f((250/2)+50, 50)
-        for i in title:
-            glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ord(i))
+        desenhar_texto((250/2)+50, 50, GLUT_BITMAP_TIMES_ROMAN_24, title) 
+ 
+        desenhar_rect_oco((250/2)+75, 328, 100, 40)
+        desenhar_texto((250/2)+90, 350, GLUT_BITMAP_9_BY_15, start) 
 
-        # glPushMatrix()
-        # glTranslatef(-30,0, 0)
-        # glScalef(5, 5, 5)
-        # covid.bala(0)
-        # glPopMatrix()   
+        desenhar_rect_oco((250/2)+75, 410, 100, 40)
+        desenhar_texto((250/2)+95, 435, GLUT_BITMAP_9_BY_15, quit) 
 
-        desenhar_rect_oco((250/2)+75, 328)
-        glColor3f(0, 0, 0)
-        glRasterPos2f((250/2)+90, 350)   
-        for i in start:
-            glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ord(i))
+    def fim_de_jogo(self):
+        glColor3f(235/255, 47/255, 6/255)
 
-        desenhar_rect_oco((250/2)+75, 410)
-        glRasterPos2f((250/2)+95, 435)
-        for i in quit:
-            glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ord(i))
+        desenhar_rect_oco(100, 100, 300, 250)
+        desenhar_texto((250/2)+70, 250, GLUT_BITMAP_TIMES_ROMAN_24, 'Game Over')
+        
+        desenhar_rect_oco((250/2)+75, 410, 100, 40)
+        desenhar_texto((250/2)+105, 435, GLUT_BITMAP_9_BY_15, 'Sair')
+

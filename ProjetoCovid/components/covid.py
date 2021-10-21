@@ -6,8 +6,6 @@ from OpenGL.GLU import *
 from variaveis_globais import *
 import math
 
-
-
 def desenhar_circulo(x, y, radius):
     triangleAmount = 800
     twicePi = 2.0 * math.pi
@@ -39,7 +37,7 @@ class Covid():
         self.dano = 0
 
     def desenhar(self):
-        glPushMatrix()
+        glPushMatrix()      
         glTranslatef(0, 50, 0)  
 
         glColor3f(235/255, 47/255, 6/255)
@@ -114,6 +112,7 @@ class Covid():
     
     def barra_de_vida(self):
         glColor3f(0, 0, 0)
+
         glRasterPos2f(440, 60)       
         for i in 'Vida':
             glutBitmapCharacter(GLUT_BITMAP_9_BY_15, ord(i))
