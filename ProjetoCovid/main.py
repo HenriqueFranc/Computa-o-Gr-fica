@@ -55,7 +55,7 @@ def colisoes_covid():
         colisãoCovidEsquerda = True
         colisãoCovidDireita = False
 
-def atingir_bala_vacina():
+def colisoes_bala_vacina():
     global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx,atingiu
 
     colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ( (xbala + moverX) >= (minXcovid + covidTx))
@@ -67,7 +67,7 @@ def atingir_bala_vacina():
     else:
         atingiu = False
      
-# def atingir_bala_covid():
+# def colisoes_bala_covid():
 #     global posicaoYTiroinimigo,Tx,Ty,minX,maxX,minY,maxY,covidTx
 
 #     colisionX = (Tx + 300 ) >= (26.2 + covidTx) and ((Tx + 325) <= (73.8 + covidTx))
@@ -130,7 +130,7 @@ def controle_mouse(button, state, x, y):
 def anima_tiro_player(value):
     global posicaoY,y1,atirou,covidTx,atingiu
 
-    atingir_bala_vacina()
+    colisoes_bala_vacina()
     if atingiu == False:
         posicaoY = posicaoY - 20
 
