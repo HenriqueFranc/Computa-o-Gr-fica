@@ -2,7 +2,10 @@
 
 # Variáveis da Bala
 atirou = False
-
+atingiu = False
+xbala = 312.5
+ymaxbala = 400.0
+yminbala = 390.0
 # Variáveis de Colisão
 colisãoCima = False
 colisãoBaixo = False
@@ -20,6 +23,8 @@ Tx = 0.0
 Ty = 0.0
 minXcovid = 131
 maxXcovid = 369
+minYcovid = 31
+maxYcovid = 269
 covidTx =  0.0
 maxY = 450
 minY = 390

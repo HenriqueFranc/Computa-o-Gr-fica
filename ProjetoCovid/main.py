@@ -55,6 +55,16 @@ def colisoes_covid():
         colisãoCovidEsquerda = True
         colisãoCovidDireita = False
 
+def atingir_bala_vacina():
+    global moverX,moverY, posicaoY,maxYcovid, minYcovid ,maxXcovid,minXcovid,xbala,ymaxbala,yminbala,covidTx
+
+    colisionX = ((xbala + moverX) <= (maxXcovid + covidTx)) and ( (xbala + moverX) >= (minXcovid + covidTx))
+    colisionY = (((yminbala + moverY) + posicaoY) >= (maxYcovid))
+    
+    if colisionX and colisionY:
+        print('acertou em x e y')
+        covid.dano = covid.dano + 7
+
 def controle_teclas_alfanumericas(key, x , y):
     global atirou,moverX,moverY,Tx,Ty, menuAtivado
     
@@ -66,6 +76,7 @@ def controle_teclas_alfanumericas(key, x , y):
         moverY = Ty
     elif key == b'1':
         menuAtivado = not menuAtivado
+        covid.dano = 0
     elif key == b'\x1b':
         glutDestroyWindow(glutGetWindow())
     
@@ -99,14 +110,16 @@ def controle_mouse(button, state, x, y):
         if (state == GLUT_DOWN):
             if (x > 200 and  x < 300) and (y > 328 and y < 368):
                 menuAtivado = not menuAtivado
+                covid.dano = 0
             if (x > 200 and  x < 300) and (y > 410 and y < 450):
                 glutDestroyWindow(glutGetWindow())
 
     glutPostRedisplay()
 
 def anima_tiro_player(value):
-    global posicaoY,y1,atirou
+    global posicaoY,y1,atirou,covidTx
 
+    atingir_bala_vacina()
     posicaoY += posicaoY - 1
 
     if(((390.0 + moverY) + posicaoY) < 0):
@@ -153,11 +166,14 @@ def inicializa ():
     gluOrtho2D(0.0, width, height, 0.0)
      
 def desenha ():
-    global Tx,Ty, posicaoY,posicaoX,atirou
+    global Tx,Ty, posicaoY,posicaoX,atirou, game_over
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     
     if menuAtivado:
         menu.desenhar()
+    elif covid.dano >= 70: 
+        menu.fim_de_jogo()
     else:
         glPushMatrix()
         glTranslatef(Tx, Ty, 0.0)
@@ -181,17 +197,15 @@ def desenha ():
         glTranslatef(posicaoX,posicaoY,0)
         criarBala(moverX,moverY)
         glPopMatrix()
-        glutTimerFunc(100, anima_tiro_player,100)
+        glutTimerFunc(1000, anima_tiro_player,1)
 
 
     glutSwapBuffers()
 
 def main():
-    global width, height
-    
     glutInit()
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB)
-    glutInitWindowSize(width, height)
+    glutInitWindowSize(500, 500)
     glutCreateWindow("Covid Exterminator")
     glutSpecialFunc(controle_teclas_especiais)
     glutKeyboardFunc(controle_teclas_alfanumericas)
