@@ -154,14 +154,12 @@ def anima_covid(value):
     if (colisãoCovidEsquerda == True):
         num = 10
         
-
     elif (colisãoCovidDireita == True):
         num = -10
         
-    
     covidTx = covidTx + num
     glutPostRedisplay()
-    glutTimerFunc(10, anima_covid,1)
+    glutTimerFunc(50, anima_covid,1)
     
 def inicializa ():
     global width, height
