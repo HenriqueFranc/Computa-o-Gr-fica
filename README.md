@@ -8,3 +8,4 @@ Projetos em OpenGL e SVG da disciplina de Computação Gráfica.
 
 ## Projetos
 - [Labirinto](https://github.com/HenriqueFranc/Projeto-CG/tree/main/Labirinto)
+- [Covid Destroyer](https://github.com/HenriqueFranc/Projeto-CG/tree/main/ProjetoCovid)
